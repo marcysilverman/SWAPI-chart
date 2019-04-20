@@ -48,6 +48,20 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+h3 {
+  text-align: center;
+  font-size: 6vh;
+  margin: 2vh 35vw 2vh 35vw;
+  border: solid gray 2px;
+  border-radius: 20vw;
+  color: gray;
+  width: 25vw;
+  justify-content: center;
+}
+#list {
+  background-color: rgba(227, 227, 227, 0.5);
+  padding: 1vh;
+  margin-top: 0;
+}
 </style>
