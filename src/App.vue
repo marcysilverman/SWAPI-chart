@@ -1,28 +1,53 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="chart">
+      <h3>STAR WARS</h3>
+        <Chart
+         v-if="names && heights" 
+        :names="names"
+        :heights="heights"
+         />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Chart from './components/Chart';
+import api from '../services.js';
 
 export default {
-  name: 'app',
+  data() {
+    return {
+      names: null,
+      heights: null
+    };
+  },
   components: {
-    HelloWorld
+    Chart
+  },
+  created() {
+    api.getAllCharacters()
+      .then(response => {
+        return this.characters = response;
+      })
+      .then(() => this.names = this.getNames())
+      .then(() => this.heights = this.getHeights());
+  },
+  methods: {
+    getNames() {
+      return this.characters.results.map(result => {
+        return result.name;
+      });
+    },
+    getHeights() {
+      return this.characters.results.map(result => {
+        return result.height;
+      });
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
